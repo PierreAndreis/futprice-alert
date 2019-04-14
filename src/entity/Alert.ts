@@ -44,8 +44,8 @@ export class Alert extends BaseEntity {
   @ManyToOne(type => FUTPlayer)
   player: FUTPlayer;
 
-  @ManyToOne(type => Guild)
-  guild: Guild;
+  @ManyToOne(type => Guild, { nullable: true })
+  guild: void | Guild;
 
   @Column()
   channel_id: string;

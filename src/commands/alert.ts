@@ -83,7 +83,10 @@ export default async (args: string[], msg: Discord.Message) => {
   let priceDirection =
     currentBINPrice < priceGoal ? PriceDirection.up : PriceDirection.down;
 
-  const guild = await Guild.findByDiscordGuild(msg.guild);
+  let guild: void | Guild;
+  if (msg.guild) {
+    guild = await Guild.findByDiscordGuild(msg.guild);
+  }
 
   // check if player exists, if it does, then use it.. otherwise create a new one
   let player = await FUTPlayer.findOne({ futbin_id: futbinPlayerData.id });
@@ -114,7 +117,7 @@ export default async (args: string[], msg: Discord.Message) => {
   alert.save();
 
   msg.channel.send(
-    `I will send an alert on this channel once ${
+    `I will send a message on this channel once ${
       player.player_name
     } goes ${priceDirection} to ${priceGoal} on ${platform}. Current BIN: ${currentBINPrice}`
   );

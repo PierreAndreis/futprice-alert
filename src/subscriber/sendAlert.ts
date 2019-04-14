@@ -72,11 +72,16 @@ export class sendAlert implements EntitySubscriberInterface<FUTPlayer> {
         return;
       }
 
+      const user = client.users.get(alert.added_by_user_id);
+
       console.log("Alert sent about ", player.player_name);
       await channel.send(
         `Price for ${
           player.player_name
-        } is now ${currentPrice} on platform ${alert.platform}.`
+        } is now ${currentPrice} on platform ${alert.platform}.`,
+        {
+          reply: user
+        }
       );
     });
   }

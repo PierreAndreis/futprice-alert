@@ -34,27 +34,40 @@ client.on("ready", async () => {
 });
 
 client.on("message", async msg => {
-  if (!msg.content.startsWith(".")) return;
-
   const args = msg.content.split(" ");
-  msg.channel.startTyping();
   try {
     if (args[0] === ".ping") {
+      msg.channel.startTyping();
       await ping(args, msg);
-    }
-
-    if (args[0] === ".price") {
-      await price(args, msg);
+      msg.channel.stopTyping();
+      return;
     }
 
     if (args[0] === ".alert") {
+      msg.channel.startTyping();
       await alert(args, msg);
+      msg.channel.stopTyping();
+      return;
+    }
+
+    const containsFutBinUrl = msg.content.match(
+      /(futbin.com\/19\/player\/\w*\/.*\/)/
+    );
+
+    if (containsFutBinUrl) {
+      msg.channel.startTyping();
+      await price(containsFutBinUrl, msg);
+      msg.channel.stopTyping();
+      return;
     }
   } catch (e) {
+    if (e.message.includes("DiscordAPIError: Missing Permissions")) {
+      console.warn("Not enough permission");
+      return;
+    }
     console.warn(e);
-    msg.channel.send("Error while running");
+    msg.channel.send("Error while running. Please try again.");
   }
-  msg.channel.stopTyping();
 });
 
 client.login(process.env.BOT_TOKEN);
