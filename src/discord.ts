@@ -51,7 +51,7 @@ client.on("message", async msg => {
     }
 
     const containsFutBinUrl = msg.content.match(
-      /(futbin.com\/19\/player\/\w*\/.*\/)/
+      /(futbin.com\/19\/player\/\w*\/)/
     );
 
     if (containsFutBinUrl) {

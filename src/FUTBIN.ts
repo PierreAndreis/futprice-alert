@@ -47,17 +47,17 @@ async function getCurrentBin(playerId: string) {
     {
       platform: "ps4",
       lastUpdated: ps.lastUpdated,
-      minBin: Number(ps.LCPrice.replace(",", ""))
+      minBin: Number(ps.LCPrice.replace(/,/g, ""))
     },
     {
       platform: "xbox",
       lastUpdated: xbox.lastUpdated,
-      minBin: Number(xbox.LCPrice.replace(",", ""))
+      minBin: Number(xbox.LCPrice.replace(/,/g, ""))
     },
     {
       platform: "pc",
       lastUpdated: pc.lastUpdated,
-      minBin: Number(pc.LCPrice.replace(",", ""))
+      minBin: Number(pc.LCPrice.replace(/,/g, ""))
     }
   ];
 }

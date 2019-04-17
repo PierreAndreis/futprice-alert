@@ -38,7 +38,7 @@ export default async (args: string[], msg: Discord.Message) => {
 
     // a string that ends with "k" was sent
     if (arg.endsWith("k")) {
-      priceGoal = Number(arg.replace("k", "000"));
+      priceGoal = Number(arg.replace(/k/g, "000"));
       return;
     }
 
@@ -49,7 +49,7 @@ export default async (args: string[], msg: Discord.Message) => {
     }
 
     if (typeof arg === "string") {
-      priceGoal = Number(arg.replace(",", ""));
+      priceGoal = Number(arg.replace(/,/g, ""));
       if (Number.isNaN(priceGoal)) priceGoal = null;
       return;
     }
