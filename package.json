@@ -8,8 +8,10 @@
     "dev": "nodemon --exec 'ts-node' src/index.ts"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.123",
     "discord.js": "^11.4.2",
     "dotenv": "^7.0.0",
+    "lodash.flatten": "^4.4.0",
     "node-fetch": "^2.3.0",
     "pg": "^7.9.0",
     "reflect-metadata": "^0.1.10",

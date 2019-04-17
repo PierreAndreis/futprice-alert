@@ -13,8 +13,9 @@ const fetchOptions = {
 };
 
 async function getInfoFromUrl(
-  url: string
-): Promise<{ id: string; name: string }> {
+  url: string,
+  options: void | { thumbnail: boolean }
+): Promise<{ id: string; name: string; thumbnail: void | string }> {
   const response = await fetch(url, fetchOptions).then(r => r.text());
 
   let playerId = response.match(
@@ -27,9 +28,18 @@ async function getInfoFromUrl(
     new RegExp(/span class="header_name">(.*)</)
   );
 
+  let playerImage;
+
+  if (options && options.thumbnail) {
+    playerImage = response.match(
+      /<img class="pcdisplay-picture-width " id="player_pic" src="(.*)">/
+    );
+  }
+
   return {
     id: playerId[1],
-    name: playerName[1]
+    name: playerName[1],
+    thumbnail: playerImage && playerImage[1]
   };
 }
 
