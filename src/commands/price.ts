@@ -24,7 +24,7 @@ export default async (args: string[], msg: Discord.Message) => {
     embed: {
       author: {
         name: player.name,
-        url: `https://www.${futbinUrl}/${encodeURI(player.name)}`
+        url: `https://www.${futbinUrl}${encodeURI(player.name)}`
       },
       thumbnail: {
         url: player.thumbnail ? player.thumbnail : ""
